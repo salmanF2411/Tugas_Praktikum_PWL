@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +21,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-     protected $primaryKey = 'npm';
+    protected $primaryKey = 'npm';
     public $incrementing = false;
     protected $keyType = 'int';
     protected $fillable = [
@@ -36,7 +37,7 @@ class User extends Authenticatable
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->first_name.' '.$this->last_name
+            get: fn() => $this->first_name . ' ' . $this->last_name
         );
     }
 

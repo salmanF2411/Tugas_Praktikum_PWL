@@ -15,13 +15,24 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                     <x-nav-link :href="route('books')" :active="request()->routeIs('books')">
+                    <x-nav-link :href="route('books')" :active="request()->routeIs('books')">
                         {{ __('Buku') }}
                     </x-nav-link>
-                
+                    <x-nav-link :href="route('bookshelves')" :active="request()->routeIs('bookshelves')">
+                        {{ __('Rak Buku') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('loans')" :active="request()->routeIs('loans')">
+                        {{ __('Peminjaman') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('loan.details')" :active="request()->routeIs('loan.details')">
+                        {{ __('Detail Pinjam') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('returns')" :active="request()->routeIs('returns')">
+                        {{ __('Pengembalian') }}
+                    </x-nav-link>
                 </div>
 
-                
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -49,7 +60,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -76,6 +87,21 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('books')" :active="request()->routeIs('books')">
+                {{ __('Buku') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('bookshelves')" :active="request()->routeIs('bookshelves')">
+                {{ __('Rak Buku') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('loans')" :active="request()->routeIs('loans')">
+                {{ __('Peminjaman') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('loan.details')" :active="request()->routeIs('loan.details')">
+                {{ __('Detail Pinjam') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('returns')" :active="request()->routeIs('returns')">
+                {{ __('Pengembalian') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -95,7 +121,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
