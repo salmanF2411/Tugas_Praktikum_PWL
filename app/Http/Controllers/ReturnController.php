@@ -6,6 +6,9 @@ use App\Models\LoanDetail;
 use App\Models\ReturnRecord;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use App\Exports\ReturnExport;
+use App\Imports\ReturnImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReturnController extends Controller
 {
@@ -73,6 +76,24 @@ class ReturnController extends Controller
 
         return redirect()->route('returns')->with([
             'message' => 'Data pengembalian berhasil dihapus',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    public function export()
+    {
+        return Excel::download(new ReturnExport, 'returns.xlsx');
+    }
+
+    public function import(Request $req)
+    {
+        $req->validate([
+            'file' => 'required|max:10000|mimes:xlsx,xls',
+        ]);
+
+        Excel::import(new ReturnImport, $req->file('file'));
+        return redirect()->route('returns')->with([
+            'message' => 'Data pengembalian berhasil di import',
             'alert-type' => 'success',
         ]);
     }

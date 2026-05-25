@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Bookshelf;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use App\Exports\BookshelfExport;
+use App\Imports\BookshelfImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookshelfController extends Controller
 {
@@ -68,6 +71,24 @@ class BookshelfController extends Controller
 
         return redirect()->route('bookshelves')->with([
             'message' => 'Data rak buku berhasil dihapus',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    public function export()
+    {
+        return Excel::download(new BookshelfExport, 'bookshelves.xlsx');
+    }
+
+    public function import(Request $req)
+    {
+        $req->validate([
+            'file' => 'required|max:10000|mimes:xlsx,xls',
+        ]);
+
+        Excel::import(new BookshelfImport, $req->file('file'));
+        return redirect()->route('bookshelves')->with([
+            'message' => 'Data rak buku berhasil di import',
             'alert-type' => 'success',
         ]);
     }

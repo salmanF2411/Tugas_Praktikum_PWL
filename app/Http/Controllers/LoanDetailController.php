@@ -7,6 +7,9 @@ use App\Models\Loan;
 use App\Models\LoanDetail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use App\Exports\LoanDetailExport;
+use App\Imports\LoanDetailImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LoanDetailController extends Controller
 {
@@ -76,6 +79,24 @@ class LoanDetailController extends Controller
 
         return redirect()->route('loan.details')->with([
             'message' => 'Data detail peminjaman berhasil dihapus',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    public function export()
+    {
+        return Excel::download(new LoanDetailExport, 'loan_details.xlsx');
+    }
+
+    public function import(Request $req)
+    {
+        $req->validate([
+            'file' => 'required|max:10000|mimes:xlsx,xls',
+        ]);
+
+        Excel::import(new LoanDetailImport, $req->file('file'));
+        return redirect()->route('loan.details')->with([
+            'message' => 'Data detail peminjaman berhasil di import',
             'alert-type' => 'success',
         ]);
     }

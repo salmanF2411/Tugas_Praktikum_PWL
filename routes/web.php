@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/books/{id}/edit', [BookController::class, 'edit'])->name('books.edit');
     Route::match(['put', 'patch'], '/books/{id}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::get('/books/export', [BookController::class, 'export'])->name('books.export');
+    Route::post('/books/import', [BookController::class, 'import'])->name('books.import');
 
     Route::get('/bookshelves', [BookshelfController::class, 'index'])->name('bookshelves');
     Route::get('/bookshelves/create', [BookshelfController::class, 'create'])->name('bookshelves.create');
@@ -38,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/bookshelves/{id}/edit', [BookshelfController::class, 'edit'])->name('bookshelves.edit');
     Route::match(['put', 'patch'], '/bookshelves/{id}', [BookshelfController::class, 'update'])->name('bookshelves.update');
     Route::delete('/bookshelves/{id}', [BookshelfController::class, 'destroy'])->name('bookshelves.destroy');
+    Route::get('/bookshelves/export', [BookshelfController::class, 'export'])->name('bookshelves.export');
+    Route::post('/bookshelves/import', [BookshelfController::class, 'import'])->name('bookshelves.import');
     Route::get('/bookshelves/print', [BookshelfController::class, 'print'])->name('bookshelves.print');
 
     Route::get('/loans', [LoanController::class, 'index'])->name('loans');
@@ -46,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/loans/{id}/edit', [LoanController::class, 'edit'])->name('loans.edit');
     Route::match(['put', 'patch'], '/loans/{id}', [LoanController::class, 'update'])->name('loans.update');
     Route::delete('/loans/{id}', [LoanController::class, 'destroy'])->name('loans.destroy');
+    Route::get('/loans/export', [LoanController::class, 'export'])->name('loans.export');
+    Route::post('/loans/import', [LoanController::class, 'import'])->name('loans.import');
     Route::get('/loans/print', [LoanController::class, 'print'])->name('loans.print');
 
     Route::get('/loan-details', [LoanDetailController::class, 'index'])->name('loan.details');
@@ -54,6 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/loan-details/{id}/edit', [LoanDetailController::class, 'edit'])->name('loan.details.edit');
     Route::match(['put', 'patch'], '/loan-details/{id}', [LoanDetailController::class, 'update'])->name('loan.details.update');
     Route::delete('/loan-details/{id}', [LoanDetailController::class, 'destroy'])->name('loan.details.destroy');
+    Route::get('/loan-details/export', [LoanDetailController::class, 'export'])->name('loan.details.export');
+    Route::post('/loan-details/import', [LoanDetailController::class, 'import'])->name('loan.details.import');
     Route::get('/loan-details/print', [LoanDetailController::class, 'print'])->name('loan.details.print');
 
     Route::get('/returns', [ReturnController::class, 'index'])->name('returns');
@@ -62,6 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/returns/{id}/edit', [ReturnController::class, 'edit'])->name('returns.edit');
     Route::match(['put', 'patch'], '/returns/{id}', [ReturnController::class, 'update'])->name('returns.update');
     Route::delete('/returns/{id}', [ReturnController::class, 'destroy'])->name('returns.destroy');
+    Route::get('/returns/export', [ReturnController::class, 'export'])->name('returns.export');
+    Route::post('/returns/import', [ReturnController::class, 'import'])->name('returns.import');
     Route::get('/returns/print', [ReturnController::class, 'print'])->name('returns.print');
 });
 
